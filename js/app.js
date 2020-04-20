@@ -10,12 +10,13 @@ const fetchData = async (movieName) => {
     },
   });
 
-  console.log(movieName);
   console.log(res);
 };
 
+let timeOutId;
 const inputOneHandler = (event) => {
-  fetchData(event.target.value);
+  if (timeOutId) clearTimeout(timeOutId);
+  timeOutId = setTimeout(() => fetchData(event.target.value), 500);
 };
 
 const inputOne = document.getElementById("input-1");

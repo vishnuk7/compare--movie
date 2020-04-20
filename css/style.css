@@ -85,7 +85,7 @@ nav {
   font-size: 1.8rem;
   border-radius: 5px;
   padding: 0.5rem 0.5rem;
-  transition: all 0s;
+  transition: all 0.4s;
 }
 
 .movie-1__text:placeholder,

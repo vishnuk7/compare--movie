@@ -13,11 +13,17 @@ const fetchData = async (movieName) => {
   console.log(res);
 };
 
-let timeOutId;
+const debounce = (cb, delay = 1000) => {
+  let timeOutId;
+  return (...args) => {
+    if (timeOutId) clearTimeout(timeOutId);
+    (timeOutId = setTimeout(() => cb.apply(null, args))), delay;
+  };
+};
+
 const inputOneHandler = (event) => {
-  if (timeOutId) clearTimeout(timeOutId);
-  timeOutId = setTimeout(() => fetchData(event.target.value), 500);
+  fetchData(event.target.value);
 };
 
 const inputOne = document.getElementById("input-1");
-inputOne.addEventListener("input", inputOneHandler);
+inputOne.addEventListener("input", debounce(inputOneHandler, 500));

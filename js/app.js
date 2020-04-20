@@ -1,4 +1,5 @@
 import axios from "axios";
+import { debounce } from "./util/util";
 
 // dotenv.config({ path: __dirname + "/.env" });
 console.log(process.env.API_KEY);
@@ -11,14 +12,6 @@ const fetchData = async (movieName) => {
   });
 
   console.log(res);
-};
-
-const debounce = (cb, delay = 1000) => {
-  let timeOutId;
-  return (...args) => {
-    if (timeOutId) clearTimeout(timeOutId);
-    (timeOutId = setTimeout(() => cb.apply(null, args))), delay;
-  };
 };
 
 const inputOneHandler = (event) => {

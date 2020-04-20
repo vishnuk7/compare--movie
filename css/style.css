@@ -1,0 +1,99 @@
+@import url("https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap");
+
+:root {
+  --bg-color: #232931;
+  --color-1: #393e46;
+  --color-2: #4ecca3;
+  --color-3: #eeeeee;
+  --main-padding: 15px;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Comic Neue", cursive;
+  background-color: var(--bg-color);
+}
+
+nav {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+}
+
+.brand {
+  display: flex;
+  padding: 0.5rem 0.5rem;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  width: 5rem;
+  height: 5rem;
+}
+
+.brand-name {
+  background: var(--color-2);
+  font-weight: 700;
+  color: var(--color-3);
+  font-size: 2.1rem;
+  margin-left: 1rem;
+  padding: 0 1rem;
+  border-radius: 0.3rem;
+}
+
+.main {
+  display: grid;
+  grid-template-columns: 1fr min-content 1fr;
+
+  grid-column-gap: 2rem;
+  padding: 2rem 1rem;
+}
+
+.movie-text {
+  font-size: 1.5rem;
+  align-self: center;
+}
+
+.movie-text h3 {
+  color: var(--color-2);
+  font-weight: 700;
+}
+
+.movie-1__text,
+.movie-2__text {
+  font-family: inherit;
+  font-weight: 700;
+  appearance: none;
+  width: 100%;
+  align-self: center;
+  background: #313a45;
+  color: var(--color-3);
+  border: 0.2rem solid var(--color-3);
+  font-size: 1.8rem;
+  border-radius: 5px;
+  padding: 0.5rem 0.5rem;
+  transition: all 0s;
+}
+
+.movie-1__text:placeholder,
+.movie-2__text::placeholder {
+  color: var(--color-3);
+}
+
+.movie-1__text:focus,
+.movie-2__text:focus {
+  border-color: var(--color-2);
+}

@@ -40,6 +40,10 @@ const inputOneHandler = async (event) => {
         </div>
         <div class="drop-title">${title}</div>
         `;
+      dropDown.addEventListener("click", () => {
+        rootElement.classList.remove("is-dropdown");
+        document.getElementById("input-1").value = title;
+      });
       rootElement.appendChild(dropDown);
     }
   }
@@ -49,7 +53,7 @@ const closeDropdown = (event) => {
   const clikedElement = document
     .querySelector(".input-section")
     .contains(event.target);
-  console.log(clikedElement);
+
   if (!clikedElement) {
     rootElement.classList.remove("is-dropdown");
   }

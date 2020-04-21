@@ -23,9 +23,8 @@ const inputOneHandler = async (event) => {
   const movies = await fetchData(event.target.value);
   console.log(movies.length);
   if (movies.length === 0) {
-    console.log("No movie found");
     rootElement.innerHTML = "";
-    dropDown.classList.remove("dropdown-item");
+    rootElement.classList.remove("dropdown-item");
   } else {
     console.log("yes");
     rootElement.classList.add("is-dropdown");
@@ -57,6 +56,6 @@ const closeDropdown = (event) => {
 };
 
 const inputOne = document.getElementById("input-1");
-inputOne.addEventListener("input", debounce(inputOneHandler, 1000));
+inputOne.addEventListener("input", debounce(inputOneHandler, 500));
 
 document.addEventListener("click", closeDropdown);

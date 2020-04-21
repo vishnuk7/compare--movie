@@ -10,11 +10,19 @@ const fetchData = async (movieName) => {
     },
   });
 
+  if (res.data.Error) {
+    return [];
+  }
+
   return res.data.Search;
 };
 
 const inputOneHandler = async (event) => {
   const movies = await fetchData(event.target.value);
+
+  if ((movies, length === 0)) {
+    console.log("No movie found");
+  }
 
   for (let movie of movies) {
     const div = document.createElement("div");

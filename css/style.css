@@ -22,6 +22,7 @@ html {
 }
 
 body {
+  height: 100vh;
   font-family: "Comic Neue", cursive;
   background-color: var(--bg-color);
 }

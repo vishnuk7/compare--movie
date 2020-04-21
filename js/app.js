@@ -33,7 +33,7 @@ const inputOneHandler = async (event) => {
     for (let movie of movies) {
       const imageUrl = movie.Poster === "N/A" ? "./img/logo.svg" : movie.Poster;
       const title = movie.Title;
-      const dropDown = document.createElement("div");
+      const dropDown = document.createElement("a");
       dropDown.classList.add("dropdown-item");
       dropDown.innerHTML = `
       <div class="drop-image">
@@ -46,5 +46,17 @@ const inputOneHandler = async (event) => {
   }
 };
 
+const closeDropdown = (event) => {
+  const clikedElement = document
+    .querySelector(".input-section")
+    .contains(event.target);
+  console.log(clikedElement);
+  if (!clikedElement) {
+    rootElement.classList.remove("is-dropdown");
+  }
+};
+
 const inputOne = document.getElementById("input-1");
 inputOne.addEventListener("input", debounce(inputOneHandler, 1000));
+
+document.addEventListener("click", closeDropdown);

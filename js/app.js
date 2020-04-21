@@ -31,7 +31,7 @@ const inputOneHandler = async (event) => {
     rootElement.classList.add("is-dropdown");
     rootElement.innerHTML = "";
     for (let movie of movies) {
-      const imageUrl = movie.Poster;
+      const imageUrl = movie.Poster === "N/A" ? "./img/logo.svg" : movie.Poster;
       const title = movie.Title;
       const dropDown = document.createElement("div");
       dropDown.classList.add("dropdown-item");

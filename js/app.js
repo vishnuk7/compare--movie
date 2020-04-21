@@ -40,13 +40,27 @@ const inputOneHandler = async (event) => {
         </div>
         <div class="drop-title">${title}</div>
         `;
+
       dropDown.addEventListener("click", () => {
         rootElement.classList.remove("is-dropdown");
         document.getElementById("input-1").value = title;
+        onMovieSelect(movie.imdbID);
       });
+
       rootElement.appendChild(dropDown);
     }
   }
+};
+
+const onMovieSelect = async (movieId) => {
+  const res = await axios.get("http://www.omdbapi.com/", {
+    params: {
+      apikey: process.env.API_KEY,
+      i: movieId,
+    },
+  });
+
+  console.log(res);
 };
 
 const closeDropdown = (event) => {

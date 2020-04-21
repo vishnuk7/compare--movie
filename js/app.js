@@ -61,6 +61,49 @@ const onMovieSelect = async (movieId) => {
   });
 
   console.log(res);
+  document.getElementById("summary-1").innerHTML = movieTemplate(res.data);
+  let timeId;
+  clearTimeout(timeId);
+  timeId = setTimeout(() => {
+    document.querySelector(".movie-detail-1").classList.remove("fade");
+  }, 500);
+};
+
+const movieTemplate = (movieDetails) => {
+  return `
+  <div class="main-content">
+    <div>
+      <img src="${movieDetails.Poster}" alt="${movieDetails.Title}">
+    </div>
+    <div class="movie-data">
+      <h1>${movieDetails.Title}</h1>
+      <h4>${movieDetails.Genre}</h4>
+      <p>${movieDetails.Plot}</p>  
+    </div>
+  </div>
+    <div class="statistics">
+    <article>
+      <p class="title">${movieDetails.Awards}</p>
+      <p class="subtitle">Awards</p>
+    </article>
+    <article>
+      <p class="title">${movieDetails.BoxOffice}</p>
+      <p class="subtitle">Box Office</p>
+    </article>
+    <article>
+      <p class="title">${movieDetails.Metascore}</p>
+      <p class="subtitle">Mete Score</p>
+    </article>
+    <article>
+      <p class="title">${movieDetails.imdbRating}</p>
+      <p class="subtitle">Imdb Rating</p>
+    </article>
+    <article>
+      <p class="title">${movieDetails.imdbVotes}</p>
+      <p class="subtitle">Imdb Votes</p>
+    </article>
+    </div>
+  `;
 };
 
 const closeDropdown = (event) => {

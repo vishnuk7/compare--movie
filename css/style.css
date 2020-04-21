@@ -55,11 +55,14 @@ nav {
 }
 
 .main {
+  padding: 2rem 1rem;
+}
+
+.input-section {
   display: grid;
   grid-template-columns: 1fr min-content 1fr;
 
   grid-column-gap: 2rem;
-  padding: 2rem 1rem;
 }
 
 .movie-text {
@@ -70,6 +73,11 @@ nav {
 .movie-text h3 {
   color: var(--color-2);
   font-weight: 700;
+}
+
+.movie-1,
+.movie-2 {
+  position: relative;
 }
 
 .movie-1__text,
@@ -86,6 +94,42 @@ nav {
   border-radius: 5px;
   padding: 0.5rem 0.5rem;
   transition: all 0.4s;
+}
+
+.drop-down {
+  display: grid;
+  background: var(--color-1);
+  width: 100%;
+  position: absolute;
+  z-index: 10;
+}
+
+.dropdown-item {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  grid-gap: 1rem;
+
+  margin: 0.5rem 1rem;
+
+  border: 2px solid var(--color-2);
+  border-radius: 5px;
+  padding: 0.7rem 0.6rem;
+}
+
+.dropdown-item:hover {
+  background: #31373e;
+}
+
+.drop-image img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.drop-title {
+  justify-self: center;
+  color: #fff;
+  font-size: 1.7rem;
+  font-weight: 700;
 }
 
 .movie-1__text:placeholder,

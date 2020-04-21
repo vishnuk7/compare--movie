@@ -2,7 +2,6 @@ import axios from "axios";
 import { debounce } from "./util/util";
 
 // dotenv.config({ path: __dirname + "/.env" });
-console.log(process.env.API_KEY);
 const fetchData = async (movieName) => {
   const res = await axios.get("http://www.omdbapi.com/", {
     params: {
@@ -11,12 +10,22 @@ const fetchData = async (movieName) => {
     },
   });
 
-  console.log(res);
+  return res.data.Search;
 };
 
-const inputOneHandler = (event) => {
-  fetchData(event.target.value);
+const inputOneHandler = async (event) => {
+  const movies = await fetchData(event.target.value);
+
+  for (let movie of movies) {
+    const div = document.createElement("div");
+    div.innerHTML = `
+    <img src="${movie.Poster}" alt=${movie.Title}/>
+    <h2>${movie.Title}</h2>
+  `;
+
+    document.getElementById("target").appendChild(div);
+  }
 };
 
 const inputOne = document.getElementById("input-1");
-inputOne.addEventListener("input", debounce(inputOneHandler, 500));
+inputOne.addEventListener("input", debounce(inputOneHandler, 1000));

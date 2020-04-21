@@ -24,6 +24,8 @@ const inputOneHandler = async (event) => {
   console.log(movies.length);
   if (movies.length === 0) {
     console.log("No movie found");
+    rootElement.innerHTML = "";
+    dropDown.classList.remove("dropdown-item");
   } else {
     console.log("yes");
     rootElement.classList.add("is-dropdown");

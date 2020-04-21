@@ -97,7 +97,7 @@ nav {
 }
 
 .drop-down {
-  display: grid;
+  display: none;
   background: var(--color-1);
   width: 100%;
   position: absolute;
@@ -106,7 +106,7 @@ nav {
 
 .dropdown-item {
   display: grid;
-  grid-template-columns: 80px 1fr;
+  grid-template-columns: 50px 1fr;
   grid-gap: 1rem;
 
   margin: 0.5rem 1rem;
@@ -120,13 +120,16 @@ nav {
   background: #31373e;
 }
 
+.is-dropdown {
+  display: grid;
+}
+
 .drop-image img {
   width: 100%;
   border-radius: 5px;
 }
 
 .drop-title {
-  justify-self: center;
   color: #fff;
   font-size: 1.7rem;
   font-weight: 700;

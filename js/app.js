@@ -17,21 +17,30 @@ const fetchData = async (movieName) => {
   return res.data.Search;
 };
 
+const rootElement = document.querySelector(".drop-down");
+
 const inputOneHandler = async (event) => {
   const movies = await fetchData(event.target.value);
-
-  if ((movies, length === 0)) {
+  console.log(movies.length);
+  if (movies.length === 0) {
     console.log("No movie found");
-  }
-
-  for (let movie of movies) {
-    const div = document.createElement("div");
-    div.innerHTML = `
-    <img src="${movie.Poster}" alt=${movie.Title}/>
-    <h2>${movie.Title}</h2>
-  `;
-
-    document.getElementById("target").appendChild(div);
+  } else {
+    console.log("yes");
+    rootElement.classList.add("is-dropdown");
+    rootElement.innerHTML = "";
+    for (let movie of movies) {
+      const imageUrl = movie.Poster;
+      const title = movie.Title;
+      const dropDown = document.createElement("div");
+      dropDown.classList.add("dropdown-item");
+      dropDown.innerHTML = `
+      <div class="drop-image">
+          <img src=${imageUrl} alt=${title}/>
+        </div>
+        <div class="drop-title">${title}</div>
+        `;
+      rootElement.appendChild(dropDown);
+    }
   }
 };
 

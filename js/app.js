@@ -3,11 +3,11 @@ import { debounce } from "./util/util.js";
 import { AutoComplete } from "./autocomplete.js";
 import { key } from "../key.js";
 
-const onMovieSelect = async (movieId) => {
+const onMovieSelect = async (movie) => {
   const res = await axios.get("http://www.omdbapi.com/", {
     params: {
       apikey: key,
-      i: movieId,
+      i: movie.imdbID,
     },
   });
   document.getElementById("summary-1").innerHTML = movieTemplate(res.data);

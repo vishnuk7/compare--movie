@@ -4,6 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "dev1": "babel src -d build",
     "dev": "webpack --mode development --watch",
     "build": "webpack --mode production"
   },

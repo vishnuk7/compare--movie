@@ -1,61 +1,12 @@
-import axios from "axios";
-import { debounce } from "./util/util";
-
-// dotenv.config({ path: __dirname + "/.env" });
-const fetchData = async (movieName) => {
-  const res = await axios.get("http://www.omdbapi.com/", {
-    params: {
-      apikey: process.env.API_KEY,
-      s: movieName,
-    },
-  });
-
-  if (res.data.Error) {
-    return [];
-  }
-
-  return res.data.Search;
-};
-
-const rootElement = document.querySelector(".drop-down");
-
-const inputOneHandler = async (event) => {
-  const movies = await fetchData(event.target.value);
-  console.log(movies.length);
-  if (movies.length === 0) {
-    rootElement.innerHTML = "";
-    rootElement.classList.remove("dropdown-item");
-  } else {
-    console.log("yes");
-    rootElement.classList.add("is-dropdown");
-    rootElement.innerHTML = "";
-    for (let movie of movies) {
-      const imageUrl = movie.Poster === "N/A" ? "./img/logo.svg" : movie.Poster;
-      const title = movie.Title;
-      const dropDown = document.createElement("a");
-      dropDown.classList.add("dropdown-item");
-      dropDown.innerHTML = `
-      <div class="drop-image">
-          <img src=${imageUrl} alt=${title}/>
-        </div>
-        <div class="drop-title">${title}</div>
-        `;
-
-      dropDown.addEventListener("click", () => {
-        rootElement.classList.remove("is-dropdown");
-        document.getElementById("input-1").value = title;
-        onMovieSelect(movie.imdbID);
-      });
-
-      rootElement.appendChild(dropDown);
-    }
-  }
-};
+// import axios from "axios";
+import { debounce } from "./util/util.js";
+import { AutoComplete } from "./autocomplete.js";
+import { key } from "../key.js";
 
 const onMovieSelect = async (movieId) => {
   const res = await axios.get("http://www.omdbapi.com/", {
     params: {
-      apikey: process.env.API_KEY,
+      apikey: key,
       i: movieId,
     },
   });
@@ -68,6 +19,10 @@ const onMovieSelect = async (movieId) => {
     document.querySelector(".movie-detail-1").classList.remove("fade");
   }, 500);
 };
+
+const rootElement = document.querySelector(".drop-down");
+const inputId = "input-1";
+const autoComplete = new AutoComplete(rootElement, inputId, onMovieSelect);
 
 const movieTemplate = (movieDetails) => {
   return `
@@ -117,6 +72,9 @@ const closeDropdown = (event) => {
 };
 
 const inputOne = document.getElementById("input-1");
-inputOne.addEventListener("input", debounce(inputOneHandler, 500));
+inputOne.addEventListener(
+  "input",
+  debounce(autoComplete.inputOneHandler.bind(this), 500)
+);
 
 document.addEventListener("click", closeDropdown);

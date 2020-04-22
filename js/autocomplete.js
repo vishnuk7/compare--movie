@@ -1,10 +1,11 @@
 import { fetchData } from "./fetch.js";
 
 export class AutoComplete {
-  constructor(rootElement, inputTag, onMovieSelect) {
+  constructor(rootElement, inputTag, onMovieSelect, renderOption) {
     this.rootElement = rootElement;
     this.inputTag = inputTag;
     this.onMovieSelect = onMovieSelect;
+    this.renderOption = renderOption;
   }
 
   test() {
@@ -22,21 +23,13 @@ export class AutoComplete {
       this.rootElement.classList.add("is-dropdown");
       this.rootElement.innerHTML = "";
       for (let movie of movies) {
-        const imageUrl =
-          movie.Poster === "N/A" ? "./img/logo.svg" : movie.Poster;
-        const title = movie.Title;
         const dropDown = document.createElement("a");
         dropDown.classList.add("dropdown-item");
-        dropDown.innerHTML = `
-      <div class="drop-image">
-          <img src=${imageUrl} alt=${title}/>
-        </div>
-        <div class="drop-title">${title}</div>
-        `;
+        dropDown.innerHTML = this.renderOption(movie);
 
         dropDown.addEventListener("click", () => {
           this.rootElement.classList.remove("is-dropdown");
-          document.getElementById(this.inputTag).value = title;
+          document.getElementById(this.inputTag).value = movie.Title;
           this.onMovieSelect(movie.imdbID);
         });
 

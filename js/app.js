@@ -10,8 +10,6 @@ const onMovieSelect = async (movieId) => {
       i: movieId,
     },
   });
-
-  console.log(res);
   document.getElementById("summary-1").innerHTML = movieTemplate(res.data);
   let timeId;
   clearTimeout(timeId);
@@ -20,9 +18,25 @@ const onMovieSelect = async (movieId) => {
   }, 500);
 };
 
+const renderOption = (movie) => {
+  const imageUrl = movie.Poster === "N/A" ? "./img/logo.svg" : movie.Poster;
+  const title = movie.Title;
+  return `
+  <div class="drop-image">
+      <img src=${imageUrl} alt=${title}/>
+    </div>
+    <div class="drop-title">${title}</div>
+    `;
+};
+
 const rootElement = document.querySelector(".drop-down");
 const inputId = "input-1";
-const autoComplete = new AutoComplete(rootElement, inputId, onMovieSelect);
+const autoComplete = new AutoComplete(
+  rootElement,
+  inputId,
+  onMovieSelect,
+  renderOption
+);
 
 const movieTemplate = (movieDetails) => {
   return `

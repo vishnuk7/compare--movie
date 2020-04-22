@@ -29,13 +29,18 @@ const renderOption = (movie) => {
     `;
 };
 
+const inputValue = (movie) => {
+  return movie.Title;
+};
+
 const rootElement = document.querySelector(".drop-down");
 const inputId = "input-1";
 const autoComplete = new AutoComplete(
   rootElement,
   inputId,
   onMovieSelect,
-  renderOption
+  renderOption,
+  inputValue
 );
 
 const movieTemplate = (movieDetails) => {

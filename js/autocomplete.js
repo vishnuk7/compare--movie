@@ -1,11 +1,12 @@
 import { fetchData } from "./fetch.js";
 
 export class AutoComplete {
-  constructor(rootElement, inputTag, onMovieSelect, renderOption) {
+  constructor(rootElement, inputTag, onMovieSelect, renderOption, inputValue) {
     this.rootElement = rootElement;
     this.inputTag = inputTag;
-    this.onMovieSelect = onMovieSelect;
+    this.onOptionSelect = onMovieSelect;
     this.renderOption = renderOption;
+    this.inputValue = inputValue;
   }
 
   test() {
@@ -29,8 +30,8 @@ export class AutoComplete {
 
         dropDown.addEventListener("click", () => {
           this.rootElement.classList.remove("is-dropdown");
-          document.getElementById(this.inputTag).value = movie.Title;
-          this.onMovieSelect(movie.imdbID);
+          document.getElementById(this.inputTag).value = this.inputValue(movie);
+          this.onOptionSelect(movie.imdbID);
         });
 
         this.rootElement.appendChild(dropDown);

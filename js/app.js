@@ -3,19 +3,14 @@ import { debounce } from "./util/util.js";
 import { AutoComplete } from "./autocomplete.js";
 import { key } from "../key.js";
 
-const onMovieSelect = async (movie) => {
+const onMovieSelect = async (movie, desId) => {
   const res = await axios.get("http://www.omdbapi.com/", {
     params: {
       apikey: key,
       i: movie.imdbID,
     },
   });
-  document.getElementById("summary-1").innerHTML = movieTemplate(res.data);
-  let timeId;
-  clearTimeout(timeId);
-  timeId = setTimeout(() => {
-    document.querySelector(".movie-detail-1").classList.remove("fade");
-  }, 500);
+  document.getElementById(desId).innerHTML = movieTemplate(res.data);
 };
 
 const renderOption = (movie) => {
@@ -33,14 +28,22 @@ const inputValue = (movie) => {
   return movie.Title;
 };
 
-const rootElement = document.querySelector(".drop-down");
-const inputId = "input-1";
-const autoComplete = new AutoComplete(
-  rootElement,
-  inputId,
-  onMovieSelect,
-  renderOption,
-  inputValue
+const rootElement1 = document.querySelector("#drop-down-1");
+const inputId1 = "input-1";
+const rootElement2 = document.querySelector("#drop-down-2");
+const inputId2 = "input-2";
+const autoConfig = [onMovieSelect, renderOption, inputValue];
+const autoComplete1 = new AutoComplete(
+  rootElement1,
+  inputId1,
+  "summary-1",
+  ...autoConfig
+);
+const autoComplete2 = new AutoComplete(
+  rootElement2,
+  inputId2,
+  "summary-2",
+  ...autoConfig
 );
 
 const movieTemplate = (movieDetails) => {
@@ -86,14 +89,21 @@ const closeDropdown = (event) => {
     .contains(event.target);
 
   if (!clikedElement) {
-    rootElement.classList.remove("is-dropdown");
+    console.log(clikedElement);
+    rootElement1.classList.remove("is-dropdown");
   }
 };
 
 const inputOne = document.getElementById("input-1");
 inputOne.addEventListener(
   "input",
-  debounce(autoComplete.inputOneHandler.bind(this), 500)
+  debounce(autoComplete1.inputOneHandler.bind(this), 500)
+);
+
+const inputTwo = document.getElementById("input-2");
+inputTwo.addEventListener(
+  "input",
+  debounce(autoComplete2.inputOneHandler.bind(this), 500)
 );
 
 document.addEventListener("click", closeDropdown);

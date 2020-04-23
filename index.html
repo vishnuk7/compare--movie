@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/style.css" />
+
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"
       defer
@@ -27,7 +28,7 @@
             class="movie-1__text"
             placeholder="Enter a movie name"
           />
-          <div class="drop-down"></div>
+          <div id="drop-down-1"></div>
         </div>
 
         <div class="movie-text">
@@ -40,11 +41,15 @@
             class="movie-2__text"
             placeholder="Enter a movie name"
           />
+          <div id="drop-down-2"></div>
         </div>
       </div>
       <div class="movies-details">
-        <div class="movie-detail-1 fade">
+        <div class="movie-detail fade">
           <div id="summary-1"></div>
+        </div>
+        <div class="movie-detail fade">
+          <div id="summary-2"></div>
         </div>
       </div>
     </div>

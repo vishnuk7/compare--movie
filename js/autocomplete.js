@@ -1,16 +1,20 @@
 import { fetchData } from "./fetch.js";
 
 export class AutoComplete {
-  constructor(rootElement, inputTag, onMovieSelect, renderOption, inputValue) {
+  constructor(
+    rootElement,
+    inputTag,
+    rootElementId,
+    onMovieSelect,
+    renderOption,
+    inputValue
+  ) {
     this.rootElement = rootElement;
     this.inputTag = inputTag;
+    this.rootElementId = rootElementId;
     this.onOptionSelect = onMovieSelect;
     this.renderOption = renderOption;
     this.inputValue = inputValue;
-  }
-
-  test() {
-    console.log(this);
   }
 
   inputOneHandler = async (event) => {
@@ -19,6 +23,7 @@ export class AutoComplete {
       this.rootElement.innerHTML = "";
       this.rootElement.classList.remove("dropdown-item");
     } else {
+      console.log(this);
       this.rootElement.classList.add("is-dropdown");
       this.rootElement.innerHTML = "";
       for (let item of items) {
@@ -29,7 +34,7 @@ export class AutoComplete {
         dropDown.addEventListener("click", () => {
           this.rootElement.classList.remove("is-dropdown");
           document.getElementById(this.inputTag).value = this.inputValue(item);
-          this.onOptionSelect(item);
+          this.onOptionSelect(item, this.rootElementId);
         });
 
         this.rootElement.appendChild(dropDown);

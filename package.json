@@ -11,7 +11,7 @@
   "author": "vishnu k raman",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.19.2"
+    "axios": "^0.21.1"
   },
   "devDependencies": {
     "dotenv-webpack": "^1.7.0",
